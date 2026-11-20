@@ -96,5 +96,21 @@ namespace RegIN_Shashin.Pages
             IsCapture = true;
             SendNewPassword();
         }
+        public Recovery()
+        {
+            InitializeComponent();
+            MainWindow.mainWindow.UserLogIn.HandlerCorrectLogin += CorrectLogin;
+            MainWindow.mainWindow.UserLogIn.HandlerInCorrectLogin += InCorrectLogin;
+            Capture.HandlerCorrectCapture += CorrectCapture;
+        }
+        private void SetLogin(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                MainWindow.mainWindow.UserLogIn.GetUserLogin(TbLogin.Text);
+        }
+
+        private void SetLogin(object sender, RoutedEventArgs e) =>
+            MainWindow.mainWindow.UserLogIn.GetUserLogin(TbLogin.Text);
+
     }
 }
