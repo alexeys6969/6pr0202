@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,10 @@ namespace RegIN_Shashin.Pages
         {
             InitializeComponent();
         }
+        OpenFileDialog FileDialogImage = new OpenFileDialog();
+        bool BCorrectLogin = false;
+        bool BCorrectPassword = false;
+        bool BCorrectConfirmPassword = false;
+        bool BSetImages = false;
     }
 }
