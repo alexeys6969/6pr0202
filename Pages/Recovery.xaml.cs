@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RegIN_Shashin.Pages
 {
@@ -26,10 +18,15 @@ namespace RegIN_Shashin.Pages
     {
         string OldLogin;
         bool IsCapture = false;
+
         public Recovery()
         {
             InitializeComponent();
+            MainWindow.mainWindow.UserLogIn.HandlerCorrectLogin += CorrectLogin;
+            MainWindow.mainWindow.UserLogIn.HandlerInCorrectLogin += InCorrectLogin;
+            Capture.HandlerCorrectCapture += CorrectCapture;
         }
+
         private void CorrectLogin()
         {
             if (OldLogin != TbLogin.Text)
@@ -66,6 +63,7 @@ namespace RegIN_Shashin.Pages
                 SendNewPassword();
             }
         }
+
         private void InCorrectLogin()
         {
             if (LNameUser.Content != "")
@@ -90,19 +88,14 @@ namespace RegIN_Shashin.Pages
             if (TbLogin.Text.Length > 0)
                 SetNotification("Login is incorrect", Brushes.Red);
         }
+
         private void CorrectCapture()
         {
             Capture.IsEnabled = false;
             IsCapture = true;
             SendNewPassword();
         }
-        public Recovery()
-        {
-            InitializeComponent();
-            MainWindow.mainWindow.UserLogIn.HandlerCorrectLogin += CorrectLogin;
-            MainWindow.mainWindow.UserLogIn.HandlerInCorrectLogin += InCorrectLogin;
-            Capture.HandlerCorrectCapture += CorrectCapture;
-        }
+
         private void SetLogin(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -138,5 +131,15 @@ namespace RegIN_Shashin.Pages
             }
         }
 
+        private void SetNotification(string Message, Brush Color)
+        {
+            LNameUser.Content = Message;
+            LNameUser.Foreground = Color;
+        }
+
+        private void OpenLogin(object sender, MouseButtonEventArgs e)
+        {
+            MainWindow.mainWindow.OpenPage(new Login());
+        }
     }
 }
