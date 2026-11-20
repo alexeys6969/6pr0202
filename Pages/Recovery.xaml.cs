@@ -22,8 +22,8 @@ namespace RegIN_Shashin.Pages
         public Recovery()
         {
             InitializeComponent();
-            MainWindow.mainWindow.UserLogIn.HandlerCorrectLogin += CorrectLogin;
-            MainWindow.mainWindow.UserLogIn.HandlerInCorrectLogin += InCorrectLogin;
+            MainWindow.mainWindow.UserLogin.HandlerCorrectLogin += CorrectLogin;
+            MainWindow.mainWindow.UserLogin.HandlerInCorrectLogin += InCorrectLogin;
             Capture.HandlerCorrectCapture += CorrectCapture;
         }
 
@@ -31,11 +31,11 @@ namespace RegIN_Shashin.Pages
         {
             if (OldLogin != TbLogin.Text)
             {
-                SetNotification("Hi, " + MainWindow.mainWindow.UserLogIn.Name, Brushes.Black);
+                SetNotification("Hi, " + MainWindow.mainWindow.UserLogin.Name, Brushes.Black);
                 try
                 {
                     BitmapImage biImg = new BitmapImage();
-                    MemoryStream ms = new MemoryStream(MainWindow.mainWindow.UserLogIn.Image);
+                    MemoryStream ms = new MemoryStream(MainWindow.mainWindow.UserLogin.Image);
                     biImg.BeginInit();
                     biImg.StreamSource = ms;
                     biImg.EndInit();
@@ -99,17 +99,17 @@ namespace RegIN_Shashin.Pages
         private void SetLogin(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-                MainWindow.mainWindow.UserLogIn.GetUserLogin(TbLogin.Text);
+                MainWindow.mainWindow.UserLogin.GetUserLogin(TbLogin.Text);
         }
 
         private void SetLogin(object sender, RoutedEventArgs e) =>
-            MainWindow.mainWindow.UserLogIn.GetUserLogin(TbLogin.Text);
+            MainWindow.mainWindow.UserLogin.GetUserLogin(TbLogin.Text);
 
         public void SendNewPassword()
         {
             if (IsCapture)
             {
-                if (MainWindow.mainWindow.UserLogIn.Password != String.Empty)
+                if (MainWindow.mainWindow.UserLogin.Password != String.Empty)
                 {
                     DoubleAnimation StartAnimation = new DoubleAnimation();
                     StartAnimation.From = 1;
@@ -126,7 +126,7 @@ namespace RegIN_Shashin.Pages
                     };
                     IUser.BeginAnimation(OpacityProperty, StartAnimation);
                     SetNotification("An email has been sent to your email.", Brushes.Black);
-                    MainWindow.mainWindow.UserLogIn.CrateNewPassword();
+                    MainWindow.mainWindow.UserLogin.CrateNewPassword();
                 }
             }
         }
