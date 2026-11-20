@@ -58,7 +58,7 @@
                     VerticalAlignment="Top"
                     KeyUp="SetLogin"
                     LostFocus="SetLogin"/>
-                
+
                 <uc:ElementCapture
                     x:Name="Capture"
                     HorizontalAlignment="Center"

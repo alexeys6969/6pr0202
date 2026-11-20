@@ -16,10 +16,10 @@ namespace RegIN_Shashin.Classes
             var smtpClient = new SmtpClient("smtp.yandex.ru")
             {
                 Port = 587,
-                Credentials = new NetworkCredential("yandex@yandex.ru", "zbahldoablcghrjt"),
+                Credentials = new NetworkCredential("alexshashin.2019@yandex.ru", "zbahldoablcghrjt"),
                 EnableSsl = true,
             };
-            smtpClient.Send("alexshashin.2023@gmail.com", To, "Проект Regin", Message);
+            smtpClient.Send("alexshashin.2019@yandex.ru", To, "Проект Regin", Message);
         }
     }
 }

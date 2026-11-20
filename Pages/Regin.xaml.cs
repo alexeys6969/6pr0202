@@ -9,6 +9,9 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using Aspose.Imaging;
+using Aspose.Imaging.FileFormats;
+using Aspose.Imaging.Shapes;
 
 namespace RegIN_Shashin.Pages
 {
@@ -145,7 +148,7 @@ namespace RegIN_Shashin.Pages
             e.Handled = !(Char.IsLetter(e.Text, 0));
         }
 
-        private void SetNotification(string Message, Brush Color)
+        private void SetNotification(string Message, System.Windows.Media.Brush Color)
         {
             LNameUser.Content = Message;
             LNameUser.Foreground = Color;
@@ -155,7 +158,7 @@ namespace RegIN_Shashin.Pages
         {
             if (FileDialogImage.ShowDialog() == true)
             {
-                using (Imaging.Image image = Imaging.Image.Load(FileDialogImage.FileName))
+                using (Aspose.Imaging.Image image = Aspose.Imaging.Image.Load(FileDialogImage.FileName))
                 {
                     int NewWidth = 0;
                     int NewHeight = 0;
@@ -172,7 +175,7 @@ namespace RegIN_Shashin.Pages
                     image.Resize(NewWidth, NewHeight);
                     image.Save("IUser.jpg");
                 }
-                using (Imaging.RasterImage rasterImage = (Imaging.RasterImage)Imaging.Image.Load("IUser.jpg"))
+                using (Aspose.Imaging.RasterImage rasterImage = (Aspose.Imaging.RasterImage)Aspose.Imaging.Image.Load("IUser.jpg"))
                 {
                     if (!rasterImage.IsCached)
                     {
@@ -187,7 +190,7 @@ namespace RegIN_Shashin.Pages
                     else
                         Y = (int)((rasterImage.Height - 256f) / 2);
 
-                    Imaging.Rectangle rectangle = new Imaging.Rectangle(X, Y, Width, Height);
+                    Aspose.Imaging.Rectangle rectangle = new Aspose.Imaging.Rectangle(X, Y, Width, Height);
                     rasterImage.Crop(rectangle);
 
                     rasterImage.Save("IUser.jpg");
@@ -204,9 +207,9 @@ namespace RegIN_Shashin.Pages
                     EndAnimation.From = 0;
                     EndAnimation.To = 1;
                     EndAnimation.Duration = TimeSpan.FromSeconds(1.2);
-                    IUser.BeginAnimation(Image.OpacityProperty, EndAnimation);
+                    IUser.BeginAnimation(System.Windows.Controls.Image.OpacityProperty, EndAnimation);
                 };
-                IUser.BeginAnimation(Image.OpacityProperty, StartAnimation);
+                IUser.BeginAnimation(System.Windows.Controls.Image.OpacityProperty, StartAnimation);
                 BSetImages = true;
             }
             else

@@ -126,7 +126,7 @@ namespace RegIN_Shashin.Pages
                     };
                     IUser.BeginAnimation(OpacityProperty, StartAnimation);
                     SetNotification("An email has been sent to your email.", Brushes.Black);
-                    MainWindow.mainWindow.UserLogin.CrateNewPassword();
+                    MainWindow.mainWindow.UserLogin.CreateNewPassword();
                 }
             }
         }
