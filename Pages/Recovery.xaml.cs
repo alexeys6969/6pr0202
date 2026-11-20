@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -64,6 +65,36 @@ namespace RegIN_Shashin.Pages
                 OldLogin = TbLogin.Text;
                 SendNewPassword();
             }
+        }
+        private void InCorrectLogin()
+        {
+            if (LNameUser.Content != "")
+            {
+                LNameUser.Content = "";
+                DoubleAnimation StartAnimation = new DoubleAnimation();
+                StartAnimation.From = 1;
+                StartAnimation.To = 0;
+                StartAnimation.Duration = TimeSpan.FromSeconds(0.6);
+                StartAnimation.Completed += delegate
+                {
+                    IUser.Source = new BitmapImage(new Uri("pack://application:,,,/Images/ic-user.png"));
+                    DoubleAnimation EndAnimation = new DoubleAnimation();
+                    EndAnimation.From = 0;
+                    EndAnimation.To = 1;
+                    EndAnimation.Duration = TimeSpan.FromSeconds(1.2);
+                    IUser.BeginAnimation(OpacityProperty, EndAnimation);
+                };
+                IUser.BeginAnimation(OpacityProperty, StartAnimation);
+            }
+
+            if (TbLogin.Text.Length > 0)
+                SetNotification("Login is incorrect", Brushes.Red);
+        }
+        private void CorrectCapture()
+        {
+            Capture.IsEnabled = false;
+            IsCapture = true;
+            SendNewPassword();
         }
     }
 }
